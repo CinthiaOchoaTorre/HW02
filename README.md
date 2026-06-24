@@ -43,4 +43,4 @@ HW2/
 
 ---
 
-*Built with HTML & CSS only — Cinthia Ochoa and  Amiramiv Ramim*
+*Built with HTML & CSS only — Cinthia Ochoa and  Aminur Ramim*
