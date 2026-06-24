@@ -1,43 +1,461 @@
-/* 4th of July Color Palette & Variables */
-:root {
+/* ============================================================
+   STARS & STRIPES CANVAS — stars-and-stripes.css
+   ============================================================ */
+
+   :root {
     --patriot-blue: #002868;
-    --liberty-red: #BF0A30;
-    --star-gold: #FFD700;
+    --liberty-red:  #BF0A30;
+    --star-gold:    #FFD700;
     --cannon-smoke: #1a1a2e;
-    --parchment: #f5f0e8;
-    
-    /* Spacing Variables */
-    --space-1: 0.25rem;
-    --space-2: 0.5rem;
-    --space-3: 1rem;
-    --space-4: 2rem;
+    --parchment:    #f5f0e8;
+    --night-sky:    #080a1e;
+    --dusk-sky:     #1a1060;
+    --sand:         #c8a96e;
+    --ocean:        #1a3a6e;
   }
   
-  /* Reduced Motion Preferences */
   @media (prefers-reduced-motion: reduce) {
-    * {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition: none !important;
-    }
+    * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition: none !important; }
   }
   
-  /* CSS-only page navigation with :target */
-  .page {
-    display: none;
+  /* ── RESET ─────────────────────────────────────────── */
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Open Sans', system-ui, sans-serif;
+    background: var(--night-sky);
+    color: var(--parchment);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  h1,h2,h3 { font-family: 'Oswald', Impact, sans-serif; letter-spacing:.04em; }
+  
+  /* ── PAGE SWITCHING (CSS-only :target) ─────────────── */
+  .page { display:none; width:100%; }
+  #shore:not(:target) { display:block; }
+  body:has(#sparklers:target) #shore,
+  body:has(#fireworks:target) #shore { display:none; }
+  .page:target { display:block; }
+  
+  /* ── SKIP LINK ─────────────────────────────────────── */
+  .skip-link { position:absolute; left:-999px; top:0; z-index:1000; background:var(--star-gold); color:var(--cannon-smoke); padding:.25rem 1rem; font-weight:700; border-radius:0 0 6px 0; }
+  .skip-link:focus { left:0; }
+  
+  /* ── HEADER ─────────────────────────────────────────── */
+  .site-header {
+    position:sticky; top:0; z-index:100;
+    display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:.5rem;
+    padding:.5rem 2rem;
+    background:linear-gradient(90deg, var(--patriot-blue), var(--liberty-red));
+    border-bottom:3px solid var(--star-gold);
+    box-shadow:0 2px 12px rgba(0,0,0,.4);
+  }
+  .brand { display:flex; align-items:center; gap:.5rem; font-size:1.4rem; font-weight:700; color:#fff; text-shadow:0 1px 3px rgba(0,0,0,.5); }
+  .brand .badge { display:inline-grid; place-items:center; width:34px; height:34px; background:var(--star-gold); color:var(--patriot-blue); border-radius:50%; font-size:1.1rem; }
+  .site-nav { display:flex; gap:.25rem; flex-wrap:wrap; }
+  .site-nav a { color:#fff; text-decoration:none; font-weight:600; font-size:.9rem; padding:.25rem 1rem; border-radius:999px; border:1px solid rgba(255,255,255,.35); transition:background .25s,transform .15s,color .25s; }
+  .site-nav a:hover, .site-nav a:focus-visible { background:var(--star-gold); color:var(--patriot-blue); transform:translateY(-2px); outline:none; }
+  a:focus-visible { outline:3px solid var(--star-gold); outline-offset:2px; }
+  
+  /* ── STORY PANEL SHELL ──────────────────────────────── */
+  .story-panel {
+    position:relative; min-height:82vh; overflow:hidden;
+    display:flex; align-items:center;
   }
   
-  .page:target {
-    display: block;
+  /* ── PAGE NAV ───────────────────────────────────────── */
+  .page-nav { display:flex; justify-content:space-between; gap:.5rem; max-width:1100px; margin:0 auto; padding:2rem; }
+  .cta { display:inline-block; text-decoration:none; font-weight:700; padding:.5rem 2rem; border-radius:999px; background:var(--liberty-red); color:#fff; border:2px solid var(--star-gold); transition:transform .2s,background .25s; }
+  .cta:hover { background:var(--patriot-blue); transform:scale(1.05); }
+  .cta.ghost { background:transparent; }
+  
+  /* ── FOOTER ─────────────────────────────────────────── */
+  .site-footer { text-align:center; padding:2rem; background:var(--patriot-blue); border-top:3px solid var(--star-gold); font-size:.9rem; }
+  .site-footer .stripe-rule { height:6px; margin-bottom:1rem; background:repeating-linear-gradient(90deg,var(--liberty-red) 0 40px,var(--parchment) 40px 80px); }
+  
+  /* ── STORY CAPTION BUBBLE ───────────────────────────── */
+  .story-caption { position:relative; z-index:30; max-width:420px; padding:2rem; }
+  .story-caption.caption-left  { margin-left:5%; margin-right:auto; }
+  .story-caption.caption-right { margin-left:auto; margin-right:5%; }
+  .caption-bubble {
+    background:rgba(4,5,18,.82); border:2px solid rgba(255,215,0,.45); border-radius:18px;
+    padding:1.8rem 2rem;
+    box-shadow:0 8px 32px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.05);
+    backdrop-filter:blur(3px);
+    clip-path:polygon(0 0,100% 0,100% calc(100% - 16px),calc(100% - 16px) 100%,0 100%);
+  }
+  .caption-chapter { display:block; font-family:'Oswald',sans-serif; font-size:.72rem; letter-spacing:.2em; text-transform:uppercase; color:var(--star-gold); opacity:.75; margin-bottom:.5rem; }
+  .caption-title { font-size:clamp(1.5rem,3.2vw,2.2rem) !important; color:#fff !important; text-shadow:0 0 20px rgba(255,215,0,.5),0 2px 6px rgba(0,0,0,.7) !important; animation:heroPulse 4s ease-in-out infinite !important; line-height:1.2; margin-bottom:.9rem; }
+  .caption-body { font-family:'Lora',Georgia,serif; font-size:clamp(.9rem,1.7vw,1.05rem); color:rgba(245,240,232,.9); line-height:1.78; margin-bottom:.7rem; }
+  .caption-body em { color:var(--star-gold); font-style:italic; }
+  .caption-body:last-child { margin-bottom:0; }
+  @keyframes heroPulse {
+    0%,100% { text-shadow:0 0 18px rgba(255,215,0,.5),0 2px 6px rgba(0,0,0,.7); }
+    50%      { text-shadow:0 0 28px rgba(255,215,0,.9),0 2px 6px rgba(0,0,0,.7); }
   }
   
-  /* Fireworks sparkle animation */
-  @keyframes sparkle {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
+  /* ══════════════════════════════════════════════════════
+     SHARED ELEMENTS
+     ══════════════════════════════════════════════════════ */
+  
+  /* STAR FIELD */
+  .star-field { position:absolute; inset:0; z-index:1; pointer-events:none; }
+  .star-field .star { position:absolute; width:2px; height:2px; background:#fff; border-radius:50%; animation:sparkle 1.5s ease-in-out infinite; }
+  .star-field .star:nth-child(5n) { width:3px; height:3px; }
+  .star-field .star:nth-child(1)  { left:6%;  top:8%;  animation-delay:.1s }
+  .star-field .star:nth-child(2)  { left:14%; top:18%; animation-delay:.5s }
+  .star-field .star:nth-child(3)  { left:23%; top:6%;  animation-delay:.9s }
+  .star-field .star:nth-child(4)  { left:31%; top:22%; animation-delay:1.3s }
+  .star-field .star:nth-child(5)  { left:39%; top:11%; animation-delay:.3s }
+  .star-field .star:nth-child(6)  { left:47%; top:19%; animation-delay:1.7s }
+  .star-field .star:nth-child(7)  { left:55%; top:7%;  animation-delay:.7s }
+  .star-field .star:nth-child(8)  { left:63%; top:23%; animation-delay:1.1s }
+  .star-field .star:nth-child(9)  { left:71%; top:10%; animation-delay:2.1s }
+  .star-field .star:nth-child(10) { left:79%; top:17%; animation-delay:.4s }
+  .star-field .star:nth-child(11) { left:87%; top:5%;  animation-delay:1.5s }
+  .star-field .star:nth-child(12) { left:94%; top:14%; animation-delay:.8s }
+  .star-field .star:nth-child(13) { left:10%; top:30%; animation-delay:1.9s }
+  .star-field .star:nth-child(14) { left:42%; top:32%; animation-delay:.6s }
+  .star-field .star:nth-child(15) { left:76%; top:31%; animation-delay:1.4s }
+  .star-field .star:nth-child(16) { left:20%; top:42%; animation-delay:.2s }
+  .star-field .star:nth-child(17) { left:52%; top:38%; animation-delay:1.0s }
+  .star-field .star:nth-child(18) { left:68%; top:44%; animation-delay:1.6s }
+  .star-field .star:nth-child(19) { left:84%; top:36%; animation-delay:.8s }
+  .star-field .star:nth-child(20) { left:35%; top:48%; animation-delay:2.2s }
+  @keyframes sparkle { 0%,100%{opacity:.6;transform:scale(1)} 50%{opacity:1;transform:scale(1.4)} }
+  
+  /* MOON */
+  .moon {
+    position:absolute; z-index:3;
+    top:8%; right:12%;
+    width:52px; height:52px;
+    background:radial-gradient(circle at 38% 38%, #fffde0, #f0d060);
+    border-radius:50%;
+    box-shadow:0 0 18px 6px rgba(255,240,100,.25), 0 0 40px 10px rgba(255,240,100,.1);
+    animation:moonGlow 5s ease-in-out infinite;
+  }
+  .moon.moon-full { top:6%; right:8%; width:64px; height:64px; box-shadow:0 0 28px 10px rgba(255,240,100,.35),0 0 60px 20px rgba(255,240,100,.15); }
+  @keyframes moonGlow { 0%,100%{box-shadow:0 0 18px 6px rgba(255,240,100,.25),0 0 40px 10px rgba(255,240,100,.1)} 50%{box-shadow:0 0 28px 12px rgba(255,240,100,.4),0 0 60px 20px rgba(255,240,100,.2)} }
+  
+  /* CLOUDS */
+  .cloud { position:absolute; background:rgba(255,255,255,.12); border-radius:100px; filter:blur(2px); z-index:3; animation:cloudDrift 36s linear infinite; }
+  .cloud::before,.cloud::after { content:''; position:absolute; background:inherit; border-radius:50%; }
+  .cloud.c1 { width:90px; height:24px; top:16%; }
+  .cloud.c1::before { width:44px; height:44px; top:-20px; left:12px; }
+  .cloud.c1::after  { width:34px; height:34px; top:-14px; left:46px; }
+  .cloud.c2 { width:120px; height:30px; top:28%; animation-duration:48s; animation-delay:8s; }
+  .cloud.c2::before { width:56px; height:56px; top:-26px; left:16px; }
+  .cloud.c2::after  { width:40px; height:40px; top:-16px; left:60px; }
+  @keyframes cloudDrift { 0%{left:-160px} 100%{left:100vw} }
+  
+  /* BIRDS */
+  .bird { position:absolute; width:22px; height:8px; z-index:4; animation:flyAcross 22s linear infinite; }
+  .bird.b1 { top:13%; animation-delay:0s }
+  .bird.b2 { top:20%; animation-delay:7s; animation-duration:28s }
+  .bird span { position:absolute; top:0; width:11px; height:7px; border-top:2px solid rgba(255,255,255,.7); border-radius:50%; animation:flap .9s ease-in-out infinite; }
+  .bird span.l { left:0; transform:rotate(15deg) }
+  .bird span.r { right:0; transform:rotate(-15deg) }
+  @keyframes flap { 0%,100%{transform:scaleY(1)} 50%{transform:scaleY(.3)} }
+  @keyframes flyAcross { 0%{left:-30px;transform:translateY(0)} 50%{transform:translateY(-16px)} 100%{left:100vw;transform:translateY(4px)} }
+  
+  /* WAVES */
+  .wave { position:absolute; left:-10%; width:120%; z-index:3; background:linear-gradient(to bottom,rgba(100,160,255,.22),transparent); border-radius:50%; filter:blur(2px); }
+  .wave.w1 { bottom:8%;  height:52px; animation:roll 5s ease-in-out infinite }
+  .wave.w2 { bottom:5%;  height:38px; animation:roll 6.5s ease-in-out infinite reverse; opacity:.7 }
+  .wave.w3 { bottom:2%;  height:28px; animation:roll 8s ease-in-out infinite; opacity:.5 }
+  @keyframes roll { 0%,100%{transform:translateX(0) scaleY(1)} 50%{transform:translateX(-3%) scaleY(1.3)} }
+  
+  /* SMOKE */
+  .smoke { position:absolute; width:160px; height:70px; background:radial-gradient(ellipse,rgba(200,200,220,.12),transparent 70%); border-radius:50%; filter:blur(8px); z-index:2; animation:smokeDrift 26s linear infinite; }
+  .smoke.s1 { top:14%; } .smoke.s2 { top:24%; animation-delay:9s; transform:scale(1.4) } .smoke.s3 { top:10%; animation-delay:17s; transform:scale(.8) }
+  @keyframes smokeDrift { 0%{left:-180px;opacity:0} 15%{opacity:1} 85%{opacity:1} 100%{left:100vw;opacity:0} }
+  
+  /* FIREWORKS */
+  .firework { position:absolute; width:6px; height:6px; z-index:4; }
+  .firework .ray { position:absolute; top:0; left:0; width:4px; height:4px; border-radius:50%; opacity:0; animation:explode 2.4s ease-out infinite; }
+  .firework .ray:nth-child(1){--a:0deg}   .firework .ray:nth-child(2){--a:30deg}  .firework .ray:nth-child(3){--a:60deg}
+  .firework .ray:nth-child(4){--a:90deg}  .firework .ray:nth-child(5){--a:120deg} .firework .ray:nth-child(6){--a:150deg}
+  .firework .ray:nth-child(7){--a:180deg} .firework .ray:nth-child(8){--a:210deg} .firework .ray:nth-child(9){--a:240deg}
+  .firework .ray:nth-child(10){--a:270deg}.firework .ray:nth-child(11){--a:300deg}.firework .ray:nth-child(12){--a:330deg}
+  .firework .ray { transform:rotate(var(--a)) translateY(0); }
+  @keyframes explode {
+    0%   { opacity:0; transform:rotate(var(--a)) translateY(0) scale(1); }
+    8%   { opacity:1; }
+    60%  { opacity:1; transform:rotate(var(--a)) translateY(-70px) scale(1); }
+    100% { opacity:0; transform:rotate(var(--a)) translateY(-95px) scale(.3); }
+  }
+  .firework::after { content:''; position:absolute; width:10px; height:10px; border-radius:50%; background:radial-gradient(circle,#fff,transparent 70%); animation:flash 2.4s ease-out infinite; animation-delay:inherit; }
+  @keyframes flash { 0%,6%{opacity:0;transform:scale(.2)} 10%{opacity:1;transform:scale(1.6)} 30%{opacity:0;transform:scale(.5)} 100%{opacity:0} }
+  .fw1{left:18%;top:16%} .fw1 .ray,.fw1::after{animation-delay:0s}   .fw1 .ray{background:var(--liberty-red);box-shadow:0 0 6px var(--liberty-red)}
+  .fw2{left:48%;top:10%} .fw2 .ray,.fw2::after{animation-delay:.9s}   .fw2 .ray{background:#fff;box-shadow:0 0 6px #fff}
+  .fw3{left:72%;top:18%} .fw3 .ray,.fw3::after{animation-delay:1.7s}  .fw3 .ray{background:#6699ff;box-shadow:0 0 6px #4d7cff}
+  .fw4{left:34%;top:24%} .fw4 .ray,.fw4::after{animation-delay:2.3s}  .fw4 .ray{background:var(--star-gold);box-shadow:0 0 6px var(--star-gold)}
+  .fw5{left:60%;top:28%} .fw5 .ray,.fw5::after{animation-delay:1.3s}  .fw5 .ray{background:var(--liberty-red);box-shadow:0 0 6px var(--liberty-red)}
+  
+  /* ══════════════════════════════════════════════════════
+     PAGE 1 — SHORE  (dusk parade to the beach)
+     ══════════════════════════════════════════════════════ */
+  .panel-shore {
+    background:linear-gradient(to bottom,
+      #0e0830 0%, #1a1060 20%, #2a1a80 35%,
+      #1a2870 55%, #0e1a50 68%,
+      #0a1230 78%, #061020 100%);
+    min-height:82vh;
   }
   
-  .star {
-    animation: sparkle 1.5s ease-in-out infinite;
+  /* sand / ground strip */
+  .ground {
+    position:absolute; bottom:0; left:0; width:100%; height:22%;
+    background:linear-gradient(to bottom, #4a3820, #2a1e0e);
+    z-index:4;
+    overflow:hidden;
+  }
+  .road-line { position:absolute; top:30%; height:4px; width:14%; background:rgba(255,255,255,.15); border-radius:2px; }
+  .road-line.rl1 { left:5%;  animation:roadScroll 3s linear infinite; }
+  .road-line.rl2 { left:38%; animation:roadScroll 3s linear infinite .8s; }
+  .road-line.rl3 { left:68%; animation:roadScroll 3s linear infinite 1.6s; }
+  @keyframes roadScroll { 0%{left:120%} 100%{left:-20%} }
+  
+  /* dusk sky gradient layer */
+  .dusk-sky { position:absolute; inset:0; z-index:0; background:radial-gradient(ellipse at 50% 110%, rgba(255,120,40,.18) 0%, transparent 60%); animation:duskPulse 8s ease-in-out infinite; }
+  @keyframes duskPulse { 0%,100%{opacity:.5} 50%{opacity:1} }
+  
+  /* horizon glow */
+  .shore-horizon { position:absolute; bottom:22%; left:0; width:100%; height:4px; z-index:3; background:linear-gradient(90deg,transparent,rgba(80,120,220,.4),rgba(100,160,255,.5),rgba(80,120,220,.4),transparent); animation:horizonPulse 6s ease-in-out infinite; }
+  @keyframes horizonPulse { 0%,100%{opacity:.4} 50%{opacity:.9} }
+  
+  /* ── WALKING CROWD ─────────────────────────────────── */
+  .crowd-walk { position:absolute; bottom:22%; left:0; width:100%; height:80px; z-index:5; }
+  .walker-group { position:absolute; bottom:0; display:flex; align-items:flex-end; gap:6px; animation:marchRight 18s linear infinite; }
+  .wg1 { animation-duration:18s; animation-delay:0s; }
+  .wg2 { animation-duration:14s; animation-delay:4s; }
+  .wg3 { animation-duration:22s; animation-delay:1s; }
+  .wg4 { animation-duration:16s; animation-delay:9s; }
+  @keyframes marchRight { 0%{left:-200px} 100%{left:110vw} }
+  
+  /* generic walker silhouette */
+  .walker { position:relative; display:flex; flex-direction:column; align-items:center; }
+  .walker .head { width:14px; height:14px; background:#111; border-radius:50%; }
+  .walker .body { width:10px; height:20px; background:#111; border-radius:4px 4px 2px 2px; }
+  .walker .arm  { position:absolute; width:4px; height:14px; background:#111; border-radius:2px; top:14px; transform-origin:top center; animation:armSwing 1s ease-in-out infinite; }
+  .walker .arm-l { left:0; animation-delay:.5s; }
+  .walker .arm-r { right:0; }
+  .walker .leg  { position:absolute; width:5px; height:16px; background:#111; border-radius:2px; bottom:-16px; transform-origin:top center; animation:legWalk 1s ease-in-out infinite; }
+  .walker .leg-l { left:1px; }
+  .walker .leg-r { right:1px; animation-delay:.5s; }
+  .walker.adult .head { width:14px; height:14px; }
+  .walker.child .head { width:10px; height:10px; }
+  .walker.child .body { height:14px; }
+  .walker.child .leg  { height:11px; bottom:-11px; }
+  .walker.child .arm  { height:10px; }
+  .walker.run { animation:bopRun .5s ease-in-out infinite; }
+  @keyframes armSwing { 0%,100%{transform:rotate(-25deg)} 50%{transform:rotate(25deg)} }
+  @keyframes legWalk  { 0%,100%{transform:rotate(-20deg)} 50%{transform:rotate(20deg)} }
+  @keyframes bopRun   { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)} }
+  
+  /* blanket roll carried by walker */
+  .beach-blanket-roll { width:18px; height:8px; background:repeating-linear-gradient(90deg,var(--liberty-red) 0 4px,#fff 4px 8px); border-radius:4px; margin-left:4px; align-self:center; }
+  
+  /* mini flag carried by walker */
+  .mini-flag { position:absolute; top:-24px; right:-4px; }
+  .flag-pole-s { width:2px; height:26px; background:#999; }
+  .flag-cloth { position:absolute; top:0; left:2px; width:16px; height:10px; background:var(--liberty-red); animation:flagWave .8s ease-in-out infinite; transform-origin:left center; }
+  @keyframes flagWave { 0%,100%{transform:skewY(-5deg) scaleX(1)} 50%{transform:skewY(5deg) scaleX(0.92)} }
+  
+  /* DOG */
+  .dog { position:relative; margin-bottom:4px; animation:dogTrot .6s ease-in-out infinite; }
+  .dog-body { width:28px; height:12px; background:#111; border-radius:6px; }
+  .dog-head { position:absolute; right:-10px; top:-6px; width:14px; height:12px; background:#111; border-radius:50% 50% 40% 40%; }
+  .dog-tail { position:absolute; left:-6px; top:-4px; width:10px; height:4px; background:#111; border-radius:2px; transform-origin:right center; animation:tailWag .4s ease-in-out infinite; }
+  .dog-leg { position:absolute; bottom:-8px; width:4px; height:9px; background:#111; border-radius:2px; transform-origin:top center; }
+  .dog-leg.dl1{left:2px;animation:dogLeg .6s ease-in-out infinite}
+  .dog-leg.dl2{left:8px;animation:dogLeg .6s ease-in-out infinite .15s}
+  .dog-leg.dl3{left:14px;animation:dogLeg .6s ease-in-out infinite .3s}
+  .dog-leg.dl4{left:20px;animation:dogLeg .6s ease-in-out infinite .45s}
+  @keyframes dogTrot { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-3px)} }
+  @keyframes tailWag { 0%,100%{transform:rotate(-30deg)} 50%{transform:rotate(30deg)} }
+  @keyframes dogLeg  { 0%,100%{transform:rotate(-18deg)} 50%{transform:rotate(18deg)} }
+  .leash { display:none; }
+  
+  /* ══════════════════════════════════════════════════════
+     PAGE 2 — SPARKLERS & ICE CREAM  (boardwalk night)
+     ══════════════════════════════════════════════════════ */
+  .panel-sparklers {
+    background:linear-gradient(to bottom,
+      #030210 0%, #080820 25%, #0a0a22 55%,
+      #0e0e1c 75%, #141218 100%);
+  }
+  
+  /* BOARDWALK */
+  .boardwalk {
+    position:absolute; bottom:0; left:0; width:100%; height:26%; z-index:4;
+    background:#1a1008;
+    display:flex; overflow:hidden;
+  }
+  .plank { flex:1; border-right:2px solid rgba(255,255,255,.06); background:repeating-linear-gradient(0deg,#1a1008 0 10px,#140e06 10px 20px); }
+  
+  /* ICE CREAM CART */
+  .ice-cream-cart {
+    position:absolute; bottom:26%; z-index:8;
+    animation:cartRoll 14s linear infinite;
+  }
+  @keyframes cartRoll { 0%{left:-160px} 100%{left:110vw} }
+  .cart-body {
+    position:relative; width:100px; height:70px;
+    background:linear-gradient(135deg,#fff 0%,#f0f0f0 100%);
+    border-radius:8px 8px 4px 4px;
+    border:2px solid #ddd;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    box-shadow:0 4px 16px rgba(0,0,0,.5);
+  }
+  .cart-sign { font-size:9px; font-weight:700; color:#c00; letter-spacing:.04em; text-align:center; }
+  .cart-window { width:60px; height:28px; background:linear-gradient(135deg,#e8f8ff,#c0e8ff); border-radius:4px; border:1px solid #acd; margin-top:4px; }
+  .cart-bell { position:absolute; top:-10px; right:6px; font-size:12px; animation:bellRing .8s ease-in-out infinite; }
+  @keyframes bellRing { 0%,100%{transform:rotate(-15deg)} 50%{transform:rotate(15deg)} }
+  .cart-umbrella { position:absolute; top:-70px; left:50%; transform:translateX(-50%); }
+  .umbrella-top { width:80px; height:28px; background:repeating-linear-gradient(90deg,var(--liberty-red) 0 13px,#fff 13px 26px); border-radius:40px 40px 0 0; }
+  .umbrella-pole { width:3px; height:42px; background:#888; margin:0 auto; }
+  .cart-wheel { position:absolute; bottom:-14px; width:22px; height:22px; background:#444; border-radius:50%; border:3px solid #666; animation:spin 1s linear infinite; }
+  .cart-wheel.cw1 { left:8px; } .cart-wheel.cw2 { right:8px; }
+  @keyframes spin { 0%{transform:rotate(0deg)} 100%{transform:rotate(360deg)} }
+  .cart-handle { position:absolute; right:-28px; top:14px; width:30px; height:4px; background:#888; border-radius:2px; }
+  
+  /* KIDS with cones */
+  .cone-kid { position:absolute; bottom:26%; z-index:7; display:flex; align-items:flex-end; gap:4px; }
+  .cone-kid.ck1 { left:28%; animation:kidBounce 1.2s ease-in-out infinite; }
+  .cone-kid.ck2 { left:44%; animation:kidBounce 1.2s ease-in-out infinite .4s; }
+  @keyframes kidBounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+  .kid-body { position:relative; display:flex; flex-direction:column; align-items:center; }
+  .kid-head { width:18px; height:18px; background:#e8c090; border-radius:50%; }
+  .kid-torso { width:14px; height:20px; background:#3050c0; border-radius:4px 4px 2px 2px; }
+  .kid-arm.holding-arm { position:absolute; top:20px; right:-10px; width:10px; height:3px; background:#e8c090; border-radius:2px; transform:rotate(-40deg); }
+  .kid-leg { position:absolute; bottom:-14px; width:5px; height:14px; background:#1a2080; border-radius:2px; transform-origin:top; animation:legWalk .9s ease-in-out infinite; }
+  .kid-leg.kl1 { left:3px; } .kid-leg.kl2 { right:3px; animation-delay:.45s; }
+  .ice-cone { display:flex; flex-direction:column; align-items:center; margin-left:2px; margin-bottom:2px; }
+  .scoop { width:18px; height:18px; border-radius:50% 50% 0 0; }
+  .scoop.s-red  { background:radial-gradient(circle at 40% 35%,#ff6688,#cc1144); }
+  .scoop.s-blue { background:radial-gradient(circle at 40% 35%,#6688ff,#2244cc); }
+  .cone-shape { width:0; height:0; border-left:9px solid transparent; border-right:9px solid transparent; border-top:20px solid #d4890a; }
+  
+  /* SPARKLER PERSONS */
+  .sparkler-person { position:absolute; bottom:26%; z-index:7; display:flex; flex-direction:column; align-items:center; }
+  .sp-person-1 { left:60%; }
+  .sp-person-2 { left:72%; animation-delay:.6s; }
+  .sp-person-3 { left:84%; animation-delay:1.2s; }
+  .sp-head { width:20px; height:20px; background:#e8c090; border-radius:50%; }
+  .sp-body { width:16px; height:28px; background:#801828; border-radius:4px 4px 2px 2px; }
+  .sp-arm.raised { width:4px; height:30px; background:#e8c090; border-radius:2px; position:absolute; top:20px; right:0; transform:rotate(-50deg) translateY(-8px); transform-origin:bottom center; animation:armWave .9s ease-in-out infinite; }
+  @keyframes armWave { 0%,100%{transform:rotate(-55deg) translateY(-8px)} 50%{transform:rotate(-40deg) translateY(-8px)} }
+  .sp-stick { position:absolute; top:-44px; right:-6px; width:3px; height:36px; background:#888; border-radius:2px; }
+  
+  /* SPARKLER TIP BURST */
+  .spark-burst {
+    position:absolute; top:-4px; left:50%; transform:translateX(-50%);
+    width:10px; height:10px; border-radius:50%;
+    background:radial-gradient(circle,#fff 0%,var(--star-gold) 40%,transparent 70%);
+    box-shadow:0 0 10px 4px var(--star-gold),0 0 20px 8px rgba(255,180,80,.6);
+    animation:sparkTip .15s linear infinite;
+  }
+  @keyframes sparkTip { 0%,100%{opacity:1;transform:translateX(-50%) scale(1)} 50%{opacity:.5;transform:translateX(-50%) scale(1.5)} }
+  
+  /* SPARK TRAILS (8 flying sparks in random directions) */
+  .spark-trail {
+    position:absolute; top:0; left:50%;
+    width:3px; height:3px; border-radius:50%;
+    background:var(--star-gold);
+    opacity:0;
+    animation:sparkFly 0.6s ease-out infinite;
+  }
+  .spark-trail.t1 { animation-delay:0s;   --tx:18px;  --ty:-22px; }
+  .spark-trail.t2 { animation-delay:.08s; --tx:-20px; --ty:-18px; }
+  .spark-trail.t3 { animation-delay:.16s; --tx:12px;  --ty:-28px; }
+  .spark-trail.t4 { animation-delay:.24s; --tx:-14px; --ty:-24px; }
+  .spark-trail.t5 { animation-delay:.32s; --tx:22px;  --ty:-10px; }
+  .spark-trail.t6 { animation-delay:.40s; --tx:-8px;  --ty:-30px; }
+  .spark-trail.t7 { animation-delay:.48s; --tx:6px;   --ty:-26px; }
+  .spark-trail.t8 { animation-delay:.56s; --tx:-18px; --ty:-12px; }
+  @keyframes sparkFly {
+    0%  { opacity:1; transform:translate(0,0) scale(1); }
+    100%{ opacity:0; transform:translate(var(--tx),var(--ty)) scale(.2); }
+  }
+  
+  /* ══════════════════════════════════════════════════════
+     PAGE 3 — FIREWORKS  (night beach, everyone watching)
+     ══════════════════════════════════════════════════════ */
+  .panel-fireworks {
+    background:linear-gradient(to bottom,
+      #020308 0%, #050818 25%, #080d28 45%,
+      #0a1030 58%, #060818 72%,
+      #030510 85%, #020306 100%);
+  }
+  
+  /* OCEAN GLOW */
+  .ocean-glow { position:absolute; top:52%; left:0; width:100%; height:22%; z-index:2; background:radial-gradient(ellipse at 50% 0%,#1a3060,transparent 70%); animation:oceanPulse 4s ease-in-out infinite; }
+  @keyframes oceanPulse { 0%,100%{opacity:.4} 50%{opacity:.8} }
+  
+  /* OCEAN REFLECTIONS of fireworks */
+  .ocean-reflection { position:absolute; top:56%; left:0; width:100%; height:14%; z-index:3; overflow:hidden; }
+  .reflect-streak { position:absolute; width:4px; border-radius:2px; animation:reflectPulse 2.4s ease-in-out infinite; }
+  .reflect-streak.rs1 { left:18%; height:30px; background:linear-gradient(to bottom,var(--liberty-red),transparent); animation-delay:0s; }
+  .reflect-streak.rs2 { left:48%; height:40px; background:linear-gradient(to bottom,#fff,transparent); animation-delay:.9s; }
+  .reflect-streak.rs3 { left:72%; height:25px; background:linear-gradient(to bottom,#6699ff,transparent); animation-delay:1.7s; }
+  @keyframes reflectPulse { 0%,100%{opacity:0;transform:scaleY(.3)} 30%{opacity:.7;transform:scaleY(1)} 60%{opacity:.4;transform:scaleY(.7)} }
+  
+  /* FIREWORK LAUNCH TRAILS (streaks going up then bursting) */
+  .launch-trail { position:absolute; bottom:52%; width:2px; border-radius:1px; z-index:3; transform-origin:bottom center; animation:launchUp 2.4s ease-in infinite; }
+  .launch-trail.lt1 { left:18%; height:60px; background:linear-gradient(to top,transparent,var(--liberty-red)); animation-delay:0s; }
+  .launch-trail.lt2 { left:48%; height:80px; background:linear-gradient(to top,transparent,#fff); animation-delay:.9s; }
+  .launch-trail.lt3 { left:72%; height:50px; background:linear-gradient(to top,transparent,#6699ff); animation-delay:1.7s; }
+  @keyframes launchUp { 0%{opacity:0;transform:scaleY(0)} 10%{opacity:.8;transform:scaleY(1)} 40%{opacity:.6} 60%{opacity:0} 100%{opacity:0} }
+  
+  /* CROWD WATCHING (silhouettes, heads tilted up) */
+  .watching-crowd {
+    position:absolute; bottom:0; left:0; width:100%; height:120px; z-index:6;
+    display:flex; align-items:flex-end; justify-content:space-evenly; padding:0 2%;
+  }
+  .watcher { display:flex; flex-direction:column; align-items:center; }
+  .wt-head { width:18px; height:18px; background:#050608; border-radius:50%; transform:rotate(-30deg); transform-origin:bottom center; }
+  .wt-body { width:22px; background:#050608; border-radius:4px 4px 0 0; }
+  .watcher:not(.short) .wt-body { height:54px; }
+  .watcher.short .wt-body { height:36px; }
+  .watcher.short .wt-head { width:14px; height:14px; }
+  
+  /* subtle look-up sway */
+  .wt1  .wt-head { animation:lookUp 5s ease-in-out infinite 0s }
+  .wt2  .wt-head { animation:lookUp 5s ease-in-out infinite .5s }
+  .wt3  .wt-head { animation:lookUp 5s ease-in-out infinite 1s }
+  .wt4  .wt-head { animation:lookUp 5s ease-in-out infinite 1.5s }
+  .wt5  .wt-head { animation:lookUp 5s ease-in-out infinite 2s }
+  .wt6  .wt-head { animation:lookUp 5s ease-in-out infinite 2.5s }
+  .wt7  .wt-head { animation:lookUp 5s ease-in-out infinite 3s }
+  .wt8  .wt-head { animation:lookUp 5s ease-in-out infinite 3.5s }
+  .wt9  .wt-head { animation:lookUp 5s ease-in-out infinite 4s }
+  .wt10 .wt-head { animation:lookUp 5s ease-in-out infinite 4.5s }
+  @keyframes lookUp { 0%,100%{transform:rotate(-28deg)} 40%{transform:rotate(-40deg)} 70%{transform:rotate(-22deg)} }
+  
+  /* crowd sparklers held up */
+  .crowd-sparkler { position:absolute; bottom:80px; width:2px; height:28px; background:#444; z-index:7; }
+  .crowd-sparkler::after { content:''; position:absolute; top:-4px; left:50%; transform:translateX(-50%); width:8px; height:8px; border-radius:50%; background:radial-gradient(circle,#fff 0%,var(--star-gold) 40%,transparent 70%); box-shadow:0 0 8px 3px var(--star-gold),0 0 16px 6px rgba(255,180,80,.6); animation:sparkTip .18s linear infinite; }
+  .crowd-sparkler.cs1 { left:15%; animation-delay:0s }
+  .crowd-sparkler.cs2 { left:52%; animation-delay:.5s }
+  .crowd-sparkler.cs3 { left:78%; animation-delay:1s }
+  
+  /* ══════════════════════════════════════════════════════
+     RESPONSIVE
+     ══════════════════════════════════════════════════════ */
+  @media (max-width: 768px) {
+    .site-header { flex-direction:column; align-items:flex-start; }
+    .story-panel { flex-direction:column; justify-content:flex-end; align-items:stretch; }
+    .story-caption { max-width:100%; padding:1rem; }
+    .story-caption.caption-left,.story-caption.caption-right { margin:0; }
+    .caption-bubble { padding:1.2rem 1.4rem; }
+    .ice-cream-cart { transform:scale(.8); transform-origin:bottom left; }
+  }
+  @media (max-width: 480px) {
+    .brand { font-size:1.1rem; }
+    .site-nav a { padding:.25rem .5rem; font-size:.8rem; }
+    .page-nav { flex-direction:column; }
+    .cta { text-align:center; }
+    .caption-title { font-size:1.3rem !important; }
+    .caption-body { font-size:.88rem; }
   }

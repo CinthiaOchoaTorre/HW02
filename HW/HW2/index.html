@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stars &amp; Stripes Canvas — A 4th of July Storybook</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Lora:ital,wght@0,400;0,600;1,400&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="stars-and-stripes.css">
+</head>
+<body>
+  <a class="skip-link" href="#shore">Skip to content</a>
+  <audio id="sfx-ocean" src="assests/audio/ocean-waves.mp3" loop></audio>
+<audio id="sfx-fireworks" src="assests/audio/fireworks.mp3" loop></audio>
+
+  <header class="site-header">
+    <div class="brand"><span class="badge" aria-hidden="true">★</span>Stars &amp; Stripes Canvas</div>
+    <nav class="site-nav" aria-label="Storybook chapters">
+      <a href="#shore">To the Shore</a>
+      <a href="#sparklers">Sparklers &amp; Ice Cream</a>
+      <a href="#fireworks">The Sky Catches Fire</a>
+    </nav>
+  </header>
+
+  <!-- ══════════════════════════════════════════════════
+       PAGE 1 — EVERYONE HEADS TO THE SHORE
+       Sky turns dark blue, town walks to beach
+  ══════════════════════════════════════════════════ -->
+  <section class="page" id="shore" aria-labelledby="shore-title" >
+    <audio src="assests/audio/ocean-waves.mp3" controls loop></audio>
+    <div class="story-panel panel-shore">
+
+      <!-- DUSK SKY -->
+      <div class="dusk-sky" aria-hidden="true"></div>
+
+      <!-- STARS appearing at dusk -->
+      <div class="star-field" aria-hidden="true">
+        <span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span>
+        <span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span>
+        <span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span>
+      </div>
+
+      <!-- MOON rising -->
+      <div class="moon" aria-hidden="true"></div>
+
+      <!-- CLOUDS drifting -->
+      <div class="cloud c1" aria-hidden="true"></div>
+      <div class="cloud c2" aria-hidden="true"></div>
+
+      <!-- BIRDS flying toward ocean -->
+      <div class="bird b1" aria-hidden="true"><span class="l"></span><span class="r"></span></div>
+      <div class="bird b2" aria-hidden="true"><span class="l"></span><span class="r"></span></div>
+
+      <!-- DISTANT OCEAN horizon glow -->
+      <div class="shore-horizon" aria-hidden="true"></div>
+
+      <!-- ROAD / GROUND -->
+      <div class="ground" aria-hidden="true">
+        <div class="road-line rl1"></div>
+        <div class="road-line rl2"></div>
+        <div class="road-line rl3"></div>
+      </div>
+
+      <!-- WALKING TOWNSPEOPLE (silhouette parade toward the right) -->
+      <div class="crowd-walk" aria-hidden="true">
+        <!-- family 1: 2 adults + 1 child -->
+        <div class="walker-group wg1">
+          <div class="walker adult wa1"><div class="head"></div><div class="body"></div><div class="arm arm-l"></div><div class="arm arm-r"></div><div class="leg leg-l"></div><div class="leg leg-r"></div></div>
+          <div class="walker adult wa2"><div class="head"></div><div class="body"></div><div class="arm arm-l"></div><div class="arm arm-r"></div><div class="leg leg-l"></div><div class="leg leg-r"></div></div>
+          <div class="walker child wc1"><div class="head"></div><div class="body"></div><div class="arm arm-l"></div><div class="arm arm-r"></div><div class="leg leg-l"></div><div class="leg leg-r"></div></div>
+          <div class="beach-blanket-roll" aria-hidden="true"></div>
+        </div>
+        <!-- family 2: adult + running child -->
+        <div class="walker-group wg2">
+          <div class="walker adult wa3"><div class="head"></div><div class="body"></div><div class="arm arm-l"></div><div class="arm arm-r"></div><div class="leg leg-l"></div><div class="leg leg-r"></div></div>
+          <div class="walker child run wc2"><div class="head"></div><div class="body"></div><div class="arm arm-l"></div><div class="arm arm-r"></div><div class="leg leg-l"></div><div class="leg leg-r"></div></div>
+        </div>
+        <!-- family 3: 2 adults + dog -->
+        <div class="walker-group wg3">
+          <div class="walker adult wa4"><div class="head"></div><div class="body"></div><div class="arm arm-l"></div><div class="arm arm-r"></div><div class="leg leg-l"></div><div class="leg leg-r"></div></div>
+          <div class="walker adult wa5"><div class="head"></div><div class="body"></div><div class="arm arm-l"></div><div class="arm arm-r"></div><div class="leg leg-l"></div><div class="leg leg-r"></div></div>
+          <div class="dog" aria-hidden="true"><div class="dog-body"></div><div class="dog-head"></div><div class="dog-tail"></div><div class="dog-leg dl1"></div><div class="dog-leg dl2"></div><div class="dog-leg dl3"></div><div class="dog-leg dl4"></div></div>
+          <div class="leash" aria-hidden="true"></div>
+        </div>
+        <!-- family 4: solo adult with flag -->
+        <div class="walker-group wg4">
+          <div class="walker adult wa6"><div class="head"></div><div class="body"></div><div class="arm arm-l"></div><div class="arm arm-r flag-arm"></div><div class="leg leg-l"></div><div class="leg leg-r"></div>
+            <div class="mini-flag" aria-hidden="true"><div class="flag-pole-s"></div><div class="flag-cloth"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- OCEAN WAVES at bottom -->
+      <div class="wave w1" aria-hidden="true"></div>
+      <div class="wave w2" aria-hidden="true"></div>
+      <div class="wave w3" aria-hidden="true"></div>
+
+      <!-- STORY CAPTION -->
+      <div class="story-caption caption-left">
+        <div class="caption-bubble">
+          <span class="caption-chapter">Chapter One</span>
+          <h1 id="shore-title" class="caption-title">🌊 Everyone heads to the shore!</h1>
+        </div>
+      </div>
+    </div>
+
+    <nav class="page-nav" aria-label="Page navigation">
+      <span></span>
+      <a class="cta" href="#sparklers">Next: Sparklers &amp; Ice Cream →</a>
+    </nav>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════
+       PAGE 2 — SPARKLERS & ICE CREAM
+       Boardwalk at night, cart rolling, sparklers waving
+  ══════════════════════════════════════════════════ -->
+  <section class="page" id="sparklers" aria-labelledby="sparklers-title">
+    <audio src="assests/audio/ocean-waves.mp3" controls loop></audio>
+    <div class="story-panel panel-sparklers">
+
+      <!-- NIGHT SKY -->
+      <div class="star-field" aria-hidden="true">
+        <span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span>
+        <span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span>
+        <span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span>
+        <span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span>
+      </div>
+
+      <!-- MOON full -->
+      <div class="moon moon-full" aria-hidden="true"></div>
+
+      <!-- BOARDWALK PLANKS -->
+      <div class="boardwalk" aria-hidden="true">
+        <div class="plank"></div><div class="plank"></div><div class="plank"></div><div class="plank"></div>
+        <div class="plank"></div><div class="plank"></div><div class="plank"></div><div class="plank"></div>
+        <div class="plank"></div><div class="plank"></div><div class="plank"></div><div class="plank"></div>
+      </div>
+
+      <!-- ICE CREAM CART rolling across -->
+      <div class="ice-cream-cart" aria-hidden="true">
+        <div class="cart-body">
+          <div class="cart-sign">🍦 ICE CREAM</div>
+          <div class="cart-window"></div>
+          <div class="cart-bell">🔔</div>
+        </div>
+        <div class="cart-umbrella">
+          <div class="umbrella-top"></div>
+          <div class="umbrella-pole"></div>
+        </div>
+        <div class="cart-wheel cw1"></div>
+        <div class="cart-wheel cw2"></div>
+        <div class="cart-handle"></div>
+      </div>
+
+      <!-- KIDS with ice cream cones -->
+      <div class="cone-kid ck1" aria-hidden="true">
+        <div class="kid-body">
+          <div class="kid-head"></div>
+          <div class="kid-torso"></div>
+          <div class="kid-arm holding-arm"></div>
+          <div class="kid-leg kl1"></div><div class="kid-leg kl2"></div>
+        </div>
+        <div class="ice-cone">
+          <div class="scoop s-red"></div>
+          <div class="cone-shape"></div>
+        </div>
+      </div>
+      <div class="cone-kid ck2" aria-hidden="true">
+        <div class="kid-body">
+          <div class="kid-head"></div>
+          <div class="kid-torso"></div>
+          <div class="kid-arm holding-arm"></div>
+          <div class="kid-leg kl1"></div><div class="kid-leg kl2"></div>
+        </div>
+        <div class="ice-cone">
+          <div class="scoop s-blue"></div>
+          <div class="cone-shape"></div>
+        </div>
+      </div>
+
+      <!-- SPARKLER HOLDERS — people waving sparklers -->
+      <div class="sparkler-person sp-person-1" aria-hidden="true">
+        <div class="sp-head"></div>
+        <div class="sp-body"></div>
+        <div class="sp-arm raised"></div>
+        <div class="sparkler sp-stick">
+          <div class="spark-burst"></div>
+          <div class="spark-trail t1"></div><div class="spark-trail t2"></div>
+          <div class="spark-trail t3"></div><div class="spark-trail t4"></div>
+          <div class="spark-trail t5"></div><div class="spark-trail t6"></div>
+          <div class="spark-trail t7"></div><div class="spark-trail t8"></div>
+        </div>
+      </div>
+      <div class="sparkler-person sp-person-2" aria-hidden="true">
+        <div class="sp-head"></div>
+        <div class="sp-body"></div>
+        <div class="sp-arm raised"></div>
+        <div class="sparkler sp-stick">
+          <div class="spark-burst"></div>
+          <div class="spark-trail t1"></div><div class="spark-trail t2"></div>
+          <div class="spark-trail t3"></div><div class="spark-trail t4"></div>
+          <div class="spark-trail t5"></div><div class="spark-trail t6"></div>
+          <div class="spark-trail t7"></div><div class="spark-trail t8"></div>
+        </div>
+      </div>
+      <div class="sparkler-person sp-person-3" aria-hidden="true">
+        <div class="sp-head"></div>
+        <div class="sp-body"></div>
+        <div class="sp-arm raised"></div>
+        <div class="sparkler sp-stick">
+          <div class="spark-burst"></div>
+          <div class="spark-trail t1"></div><div class="spark-trail t2"></div>
+          <div class="spark-trail t3"></div><div class="spark-trail t4"></div>
+          <div class="spark-trail t5"></div><div class="spark-trail t6"></div>
+          <div class="spark-trail t7"></div><div class="spark-trail t8"></div>
+        </div>
+      </div>
+
+      <!-- STORY CAPTION -->
+      <div class="story-caption caption-right">
+        <div class="caption-bubble">
+          <span class="caption-chapter">Chapter Two</span>
+          <h1 id="sparklers-title" class="caption-title">✨ Sparklers &amp; ice cream!</h1>
+        </div>
+      </div>
+    </div>
+
+    <nav class="page-nav" aria-label="Page navigation">
+      <a class="cta ghost" href="#shore">← Back: To the Shore</a>
+      <a class="cta" href="#fireworks">Next: The Sky Catches Fire →</a>
+    </nav>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════
+       PAGE 3 — THE SKY CATCHES FIRE
+       Night beach, fireworks over ocean, crowd watches
+  ══════════════════════════════════════════════════ -->
+  <section class="page" id="fireworks" aria-labelledby="fireworks-title">
+    <audio src="assests/audio/fireworks.mp3" controls loop></audio>
+    <div class="story-panel panel-fireworks">
+
+      <!-- DEEP NIGHT SKY -->
+      <div class="star-field" aria-hidden="true">
+        <span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span>
+        <span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span>
+        <span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span>
+        <span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span>
+      </div>
+
+      <!-- SMOKE trails -->
+      <div class="smoke s1" aria-hidden="true"></div>
+      <div class="smoke s2" aria-hidden="true"></div>
+      <div class="smoke s3" aria-hidden="true"></div>
+
+      <!-- FIREWORKS bursting -->
+      <div class="firework fw1" aria-hidden="true"><span class="ray"></span><span class="ray"></span><span class="ray"></span><span class="ray"></span><span class="ray"></span><span class="ray"></span><span class="ray"></span><span class="ray"></span><span class="ray"></span><span class="ray"></span><span class="ray"></span><span class="ray"></span></div>
+      <div class="firework fw2" aria-hidden="true"><span class="ray"></span><span class="ray"></span><span class="ray"></span><span class="ray"></span><span class="ray"></span><span class="ray"></span><span class="ray"></span><span class="ray"></span><span class="ray"></span><span class="ray"></span><span class="ray"></span><span class="ray"></span></div>
+      <div class="firework fw3" aria-hidden="true"><span class="ray"></span><span class="ray"></span><span class="ray"></span><span class="ray"></span><span class="ray"></span><span class="ray"></span><span class="ray"></span><span class="ray"></span><span class="ray"></span><span class="ray"></span><span class="ray"></span><span class="ray"></span></div>
+      <div class="firework fw4" aria-hidden="true"><span class="ray"></span><span class="ray"></span><span class="ray"></span><span class="ray"></span><span class="ray"></span><span class="ray"></span><span class="ray"></span><span class="ray"></span><span class="ray"></span><span class="ray"></span><span class="ray"></span><span class="ray"></span></div>
+      <div class="firework fw5" aria-hidden="true"><span class="ray"></span><span class="ray"></span><span class="ray"></span><span class="ray"></span><span class="ray"></span><span class="ray"></span><span class="ray"></span><span class="ray"></span><span class="ray"></span><span class="ray"></span><span class="ray"></span><span class="ray"></span></div>
+      <!-- launch trails going UP -->
+      <div class="launch-trail lt1" aria-hidden="true"></div>
+      <div class="launch-trail lt2" aria-hidden="true"></div>
+      <div class="launch-trail lt3" aria-hidden="true"></div>
+
+      <!-- OCEAN -->
+      <div class="ocean-glow" aria-hidden="true"></div>
+      <div class="ocean-reflection" aria-hidden="true">
+        <div class="reflect-streak rs1"></div>
+        <div class="reflect-streak rs2"></div>
+        <div class="reflect-streak rs3"></div>
+      </div>
+      <div class="wave w1" aria-hidden="true"></div>
+      <div class="wave w2" aria-hidden="true"></div>
+      <div class="wave w3" aria-hidden="true"></div>
+
+      <!-- BEACH CROWD looking up — silhouettes with tilted heads -->
+      <div class="watching-crowd" aria-hidden="true">
+        <div class="watcher wt1"><div class="wt-head up"></div><div class="wt-body"></div></div>
+        <div class="watcher wt2"><div class="wt-head up"></div><div class="wt-body"></div></div>
+        <div class="watcher wt3 short"><div class="wt-head up"></div><div class="wt-body"></div></div>
+        <div class="watcher wt4"><div class="wt-head up"></div><div class="wt-body"></div></div>
+        <div class="watcher wt5 short"><div class="wt-head up"></div><div class="wt-body"></div></div>
+        <div class="watcher wt6"><div class="wt-head up"></div><div class="wt-body"></div></div>
+        <div class="watcher wt7"><div class="wt-head up"></div><div class="wt-body"></div></div>
+        <div class="watcher wt8 short"><div class="wt-head up"></div><div class="wt-body"></div></div>
+        <div class="watcher wt9"><div class="wt-head up"></div><div class="wt-body"></div></div>
+        <div class="watcher wt10"><div class="wt-head up"></div><div class="wt-body"></div></div>
+      </div>
+
+      <!-- SPARKLERS in crowd hands -->
+      <div class="crowd-sparkler cs1" aria-hidden="true"></div>
+      <div class="crowd-sparkler cs2" aria-hidden="true"></div>
+      <div class="crowd-sparkler cs3" aria-hidden="true"></div>
+
+      <!-- STORY CAPTION -->
+      <div class="story-caption caption-left">
+        <div class="caption-bubble">
+          <span class="caption-chapter">Chapter Three</span>
+          <h1 id="fireworks-title" class="caption-title">🎆 The sky catches fire!</h1>
+        </div>
+      </div>
+    </div>
+
+    <nav class="page-nav" aria-label="Page navigation">
+      <a class="cta ghost" href="#sparklers">← Back: Sparklers &amp; Ice Cream</a>
+      <a class="cta" href="#shore">Start Over ↺</a>
+    </nav>
+  </section>
+  
+
+  <footer class="site-footer">
+    <div class="stripe-rule" aria-hidden="true"></div>
+    <p><strong>Stars &amp; Stripes Canvas</strong> — A 4th of July Interactive Storybook</p>
+    <p>"Freedom is the most powerful creative force." · Built with 100% HTML &amp; CSS</p>
+  </footer>
+</body>
+</html>
